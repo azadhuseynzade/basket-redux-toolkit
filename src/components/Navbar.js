@@ -17,6 +17,8 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import { Link } from "react-router-dom";
 import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
+import { useSelector } from "react-redux";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -80,6 +82,7 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  // const cartCount = useSelector((state) => state.cart.cart.length);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (

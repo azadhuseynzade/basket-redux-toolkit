@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { addToCart } from "../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
+  console.log(products);
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
   return (
     <Box
       sx={{
@@ -78,7 +85,10 @@ const Products = () => {
                     color: "red",
                   }}
                 >
-                  {product?.price} USD <Button>Add To Cart</Button>
+                  {product?.price} USD{" "}
+                  <Button onClick={() => dispatch(handleAddToCart(product))}>
+                    Add To Cart
+                  </Button>
                 </Typography>
               </Box>
             </Box>

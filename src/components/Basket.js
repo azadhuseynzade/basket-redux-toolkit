@@ -1,6 +1,11 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
+import { useSelector } from "react-redux";
+
 const Basket = () => {
+  const { cart } = useSelector((item) => item.user);
+  console.log(cart);
+
   return (
     <Box
       sx={{
@@ -11,7 +16,7 @@ const Basket = () => {
         alignItems: "center",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
+      {/* <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
         <Box>
           <Box
             sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}
@@ -114,7 +119,10 @@ const Basket = () => {
             Total:3500 USD 💰
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
+      {cart?.map((item) => {
+        return <h1 key={item.id}>{item?.title}</h1>;
+      })}
     </Box>
   );
 };
