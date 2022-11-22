@@ -1,17 +1,38 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../features/cartSlice";
+import {
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../features/cartSlice";
 
 const Basket = () => {
   const { cart } = useSelector((item) => item.user);
   const dispatch = useDispatch();
 
-  const total = cart.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+  const getTotalQuantity = () => {
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.quantity;
+    });
+    return total;
+  };
+
+  const getTotal = () => {
+    let totalQuantity = 0;
+    let totalPrice = 0;
+    cart.forEach((item) => {
+      totalQuantity += item.quantity;
+      totalPrice += item.price * item.quantity;
+    });
+    return { totalPrice, totalQuantity };
+  };
 
   return (
     <>
       <Typography
+        variant="h6"
         sx={{
           textAlign: "center",
           fontSize: "30px",
@@ -20,7 +41,23 @@ const Basket = () => {
           paddingTop: "20px",
         }}
       >
-        Total Amount: {total} USD 💰
+        Total Amount: {getTotal().totalPrice.toFixed(2)} USD 💰
+        {/* {getTotalQuantity() || 0}
+        total ({getTotal().totalQuantity} items) :{" "} */}
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          textAlign: "center",
+          fontSize: "30px",
+          fontWeight: "bold",
+          color: "black",
+          paddingTop: "20px",
+        }}
+      >
+        Total Products Count:
+        {/* {getTotalQuantity() || 0} */}
+        {getTotal().totalQuantity}
       </Typography>
 
       <Box
@@ -71,7 +108,17 @@ const Basket = () => {
                   fontWeight: "600",
                 }}
               >
-                {item?.price} USD
+                {item?.price * item.quantity} USD
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  textAlign: "center",
+                  fontSize: "22px",
+                  color: "black",
+                }}
+              >
+                Count :{item.quantity}
               </Typography>
               <Typography
                 variant="subtitle1"
@@ -93,6 +140,7 @@ const Basket = () => {
                 <Button
                   variant="outlined"
                   sx={{ fontSize: "20px", fontWeight: "bold" }}
+                  onClick={() => dispatch(incrementQuantity(item.id))}
                 >
                   +
                 </Button>
@@ -108,6 +156,7 @@ const Basket = () => {
                 <Button
                   variant="outlined"
                   sx={{ fontSize: "20px", fontWeight: "bold" }}
+                  onClick={() => dispatch(decrementQuantity(item.id))}
                 >
                   -
                 </Button>

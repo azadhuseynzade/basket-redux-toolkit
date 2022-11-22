@@ -15,7 +15,6 @@ const Products = () => {
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
-  console.log(products);
 
   return (
     <Box
