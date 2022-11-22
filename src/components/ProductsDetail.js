@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
+import {
+  addToCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../features/cartSlice";
+import { useDispatch } from "react-redux";
+
 const ProductsDetail = () => {
   const [product, setProduct] = useState(null);
+  const dispatch = useDispatch();
 
   let { id } = useParams();
   useEffect(() => {
@@ -11,6 +19,7 @@ const ProductsDetail = () => {
       .then((data) => setProduct(data));
   }, [id]);
 
+  console.log(product, "forCount");
   return (
     <Box
       sx={{
@@ -85,11 +94,21 @@ const ProductsDetail = () => {
                 marginTop: "10px",
               }}
             >
-              <Button sx={{ fontSize: "20px", fontWeight: "bold" }}>+</Button>
+              <Button
+                sx={{ fontSize: "20px", fontWeight: "bold" }}
+                onClick={() => dispatch(incrementQuantity(product.id))}
+              >
+                +
+              </Button>
               <Typography sx={{ fontSize: "20px", marginTop: "7px" }}>
                 0
               </Typography>
-              <Button sx={{ fontSize: "20px", fontWeight: "bold" }}>-</Button>
+              <Button
+                sx={{ fontSize: "20px", fontWeight: "bold" }}
+                onClick={() => dispatch(decrementQuantity(product.id))}
+              >
+                -
+              </Button>
             </Box>
             <Box
               sx={{
@@ -97,7 +116,12 @@ const ProductsDetail = () => {
                 justifyContent: { xs: "center", md: "left", marginTop: "15px" },
               }}
             >
-              <Button variant="contained">Add To Cart</Button>
+              <Button
+                variant="contained"
+                onClick={() => dispatch(addToCart(product))}
+              >
+                Add To Cart
+              </Button>
             </Box>
           </Box>
         </Box>
