@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addToCart } from "../features/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
+  const notify = () => toast("Added Successfully");
+
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
@@ -13,9 +17,6 @@ const Products = () => {
   }, []);
   console.log(products);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-  };
   return (
     <Box
       sx={{
@@ -86,9 +87,16 @@ const Products = () => {
                   }}
                 >
                   {product?.price} USD{" "}
-                  <Button onClick={() => dispatch(handleAddToCart(product))}>
-                    Add To Cart
-                  </Button>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none" }}
+                    onClick={notify}
+                  >
+                    <Button onClick={() => dispatch(addToCart(product))}>
+                      Add To Cart
+                    </Button>
+                    <ToastContainer position="bottom-left" />
+                  </Link>
                 </Typography>
               </Box>
             </Box>

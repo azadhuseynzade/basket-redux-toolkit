@@ -82,7 +82,7 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  // const cartCount = useSelector((state) => state.cart.cart.length);
+  const cartCount = useSelector((state) => state.user.cart.length);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -141,7 +141,7 @@ export default function Navbar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={1} color="error">
+          <Badge badgeContent={cartCount} color="error">
             <ShoppingBasketOutlinedIcon />
           </Badge>
         </IconButton>
@@ -216,7 +216,7 @@ export default function Navbar() {
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={18} color="error">
+                <Badge badgeContent={cartCount} color="error">
                   <ShoppingBasketOutlinedIcon />
                 </Badge>
               </IconButton>

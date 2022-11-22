@@ -1,75 +1,92 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../features/cartSlice";
 
 const Basket = () => {
   const { cart } = useSelector((item) => item.user);
-  console.log(cart);
+  const dispatch = useDispatch();
+
+  const total = cart.reduce((acc, item) => acc + item.price, 0).toFixed(2);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        width: "100%",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {/* <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
-        <Box>
-          <Box
-            sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}
-          >
-            <Box>
-              {" "}
-              <img
-                src={
-                  "https://kontakt.az/wp-content/uploads/2022/07/4__22_2_png.webp"
-                }
-                alt="addedProduct"
-                width={250}
-                height={250}
-              />
-            </Box>
-            <Box>
+    <>
+      <Typography
+        sx={{
+          textAlign: "center",
+          fontSize: "30px",
+          fontWeight: "bold",
+          color: "red",
+          paddingTop: "20px",
+        }}
+      >
+        Total Amount: {total} USD 💰
+      </Typography>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          flexWrap: "wrap",
+        }}
+      >
+        {cart.map((item) => {
+          return (
+            <Box
+              key={item.id}
+              sx={{
+                maxWidth: "300px",
+                borderRadius: "5px",
+                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
+                padding: "10px ",
+                marginTop: "30px",
+              }}
+            >
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  src={`${item.image}`}
+                  alt="product"
+                  width={100}
+                  height={100}
+                />
+              </Box>
+
               <Typography
                 variant="h6"
                 sx={{
-                  textAlign: { xs: "center", md: "left" },
-                  fontSize: "25px",
+                  textAlign: "center",
+                  fontSize: "16px",
                   color: "black",
-                  fontWeight: "600",
+                  fontWeight: "500",
                 }}
               >
-                Iphone
+                {item?.title}
               </Typography>
               <Typography
                 variant="subtitle1"
                 sx={{
-                  textAlign: { xs: "center", md: "left" },
+                  textAlign: "center",
                   fontSize: "22px",
-                  color: "black",
-                  fontWeight: "400",
-                }}
-              >
-                Count: 1
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  textAlign: { xs: "center", md: "left" },
-                  fontSize: "15px",
                   color: "red",
                   fontWeight: "600",
                 }}
               >
-                Price: 1200 USD
+                {item?.price} USD
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  textAlign: "center",
+                  fontSize: "16px",
+                  color: "gray",
+                }}
+              >
+                {item?.description.substring(0, 100)}...
               </Typography>
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: { xs: "center", md: "left" },
+                  justifyContent: "space-around",
                   marginTop: "10px",
                 }}
               >
@@ -94,36 +111,18 @@ const Basket = () => {
                 >
                   -
                 </Button>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: { xs: "center", md: "left" },
-                  marginTop: "20px",
-                }}
-              >
-                <Button variant="contained">Remove </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => dispatch(removeFromCart(item))}
+                >
+                  Remove
+                </Button>
               </Box>
             </Box>
-          </Box>
-        </Box>
-        <Box sx={{ marginTop: { xs: "15px", md: "0px" } }}>
-          <Typography
-            sx={{
-              fontSize: "30px",
-              marginTop: "5px",
-              fontWeight: "bold",
-              color: "red",
-            }}
-          >
-            Total:3500 USD 💰
-          </Typography>
-        </Box>
-      </Box> */}
-      {cart?.map((item) => {
-        return <h1 key={item.id}>{item?.title}</h1>;
-      })}
-    </Box>
+          );
+        })}
+      </Box>
+    </>
   );
 };
 
