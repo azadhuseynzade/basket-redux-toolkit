@@ -8,6 +8,7 @@ import {
 } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { formatter } from "../utils";
 
 const ProductsDetail = () => {
   const [product, setProduct] = useState(null);
@@ -24,11 +25,15 @@ const ProductsDetail = () => {
       .then((data) => setProduct(data));
   }, [id]);
 
+  const decrementCount = () => {
+    if (count === 1) {
+      return;
+    }
+    setCount((prevState) => prevState - 1);
+  };
+
   const incrementCount = () => {
     setCount((prevState) => prevState + 1);
-  };
-  const decrementCount = () => {
-    setCount((prevState) => prevState - 1);
   };
 
   return (
@@ -64,7 +69,7 @@ const ProductsDetail = () => {
           <Box
             sx={{
               paddingTop: "1.2rem",
-              paddingLeft: { xs: "0rem", md: "2.5rem" },
+              paddingLeft: { xs: "0", md: "2.5rem" },
             }}
           >
             <Typography
@@ -87,7 +92,7 @@ const ProductsDetail = () => {
                 fontWeight: "600",
               }}
             >
-              {product?.price} USD
+              {formatter.format(product?.price)}
             </Typography>
             <Typography
               variant="h6"

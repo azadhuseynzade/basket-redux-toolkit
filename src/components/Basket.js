@@ -6,6 +6,7 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from "../features/cartSlice";
+import { formatter } from "../utils";
 
 const Basket = () => {
   const { cart } = useSelector((item) => item.cart);
@@ -63,10 +64,10 @@ const Basket = () => {
               sx={{
                 maxWidth: "18.75rem",
                 borderRadius: "0.3rem",
-                boxShadow: "rgba(100, 100, 111, 0.2) 0rem 0.5rem 2rem 0rem;",
+                boxShadow: "rgba(100, 100, 111, 0.2) 0 0.5rem 2rem 0;",
                 padding: "0.7rem ",
                 marginTop: "2rem",
-                marginLeft: { xs: "0rem", md: "1.2rem" },
+                marginLeft: { xs: "0", md: "1.2rem" },
               }}
             >
               <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -82,7 +83,8 @@ const Basket = () => {
                 variant="h6"
                 sx={{
                   textAlign: "center",
-                  fontSize: "1rem",
+                  fontSize: { xs: "0.6rem", md: "1.2rem" },
+
                   color: "black",
                   fontWeight: "500",
                 }}
@@ -93,12 +95,12 @@ const Basket = () => {
                 variant="subtitle1"
                 sx={{
                   textAlign: "center",
-                  fontSize: "1.2rem",
+                  fontSize: { xs: "0.6rem", md: "1.2rem" },
                   color: "red",
                   fontWeight: "600",
                 }}
               >
-                {item?.price * item.quantity} USD
+                {formatter.format(item?.price * item.quantity)}
               </Typography>
               <Typography
                 variant="subtitle1"
@@ -138,7 +140,7 @@ const Basket = () => {
                   sx={{
                     fontSize: "2rem",
                     marginTop: "0.3rem",
-                    padding: "0rem 0.7rem",
+                    padding: "0 0.7rem",
                   }}
                 >
                   {item.quantity}

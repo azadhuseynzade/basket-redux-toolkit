@@ -5,6 +5,8 @@ import { addToCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { formatter } from "../utils";
+
 const Products = () => {
   const [products, setProducts] = useState([]);
 
@@ -34,7 +36,7 @@ const Products = () => {
               cursor: "pointer",
 
               borderRadius: "0.3rem",
-              boxShadow: "rgba(100, 100, 111, 0.2) 0rem 0.2rem 2rem 0rem;",
+              boxShadow: "rgba(100, 100, 111, 0.2) 0 0.2rem 2rem 0;",
               marginTop: "2rem",
               width: "22rem",
               height: "22rem",
@@ -89,7 +91,7 @@ const Products = () => {
                   color: "red",
                 }}
               >
-                {product?.price} USD{" "}
+                {formatter.format(product?.price)}
               </Box>
             </Box>
             <Box
@@ -99,17 +101,15 @@ const Products = () => {
                 paddingTop: "0.3rem",
               }}
             >
-              <Link to="/" style={{ textDecoration: "none" }}>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    dispatch(addToCart(product));
-                    notify();
-                  }}
-                >
-                  Add To Cart
-                </Button>
-              </Link>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  dispatch(addToCart(product));
+                  notify();
+                }}
+              >
+                Add To Cart
+              </Button>
             </Box>
           </Box>
         );
