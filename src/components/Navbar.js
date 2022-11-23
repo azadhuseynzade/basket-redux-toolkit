@@ -82,7 +82,7 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const cartCount = useSelector((state) => state.user.cart.length);
+  const cartCount = useSelector((state) => state.cart.cart.length);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -133,7 +133,7 @@ export default function Navbar() {
             <HomeTwoToneIcon />
           </IconButton>
         </Link>
-        <p>MUI</p>
+        <p>Express</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -184,7 +184,7 @@ export default function Navbar() {
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              MUI
+              EXPRESS
             </Link>
           </Typography>
           <Search>

@@ -6,18 +6,19 @@ import Basket from "./components/Basket";
 import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   return (
     <Provider store={store}>
-      <>
-        <Navbar />
+      <Navbar />
+      <ToastContainer position="bottom-left" />
 
-        <Routes>
-          <Route exact path="/" element={<Products />} />
-          <Route exact path="/:id" element={<ProductsDetail />} />
-          <Route exact path="/basket" element={<Basket />} />
-        </Routes>
-      </>
+      <Routes>
+        <Route exact path="/" element={<Products />} />
+        <Route exact path="/:id" element={<ProductsDetail />} />
+        <Route exact path="/basket" element={<Basket />} />
+      </Routes>
     </Provider>
   );
 }

@@ -7,19 +7,31 @@ import {
   decrementQuantity,
 } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProductsDetail = () => {
   const [product, setProduct] = useState(null);
+  const [count, setCount] = useState(1);
+
   const dispatch = useDispatch();
+  const notify = () => toast("Added Successfully");
 
   let { id } = useParams();
+
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [id]);
+  console.log(product, "producttttttt");
 
-  console.log(product, "forCount");
+  const incrementCount = () => {
+    setCount((prevState) => prevState + 1);
+  };
+  const decrementCount = () => {
+    setCount((prevState) => prevState - 1);
+  };
+
   return (
     <Box
       sx={{
@@ -96,16 +108,22 @@ const ProductsDetail = () => {
             >
               <Button
                 sx={{ fontSize: "20px", fontWeight: "bold" }}
-                onClick={() => dispatch(incrementQuantity(product.id))}
+                onClick={() => {
+                  dispatch(incrementQuantity(product.id));
+                  incrementCount();
+                }}
               >
                 +
               </Button>
               <Typography sx={{ fontSize: "20px", marginTop: "7px" }}>
-                0
+                {count}
               </Typography>
               <Button
                 sx={{ fontSize: "20px", fontWeight: "bold" }}
-                onClick={() => dispatch(decrementQuantity(product.id))}
+                onClick={() => {
+                  dispatch(decrementQuantity(product.id));
+                  decrementCount();
+                }}
               >
                 -
               </Button>
@@ -118,7 +136,10 @@ const ProductsDetail = () => {
             >
               <Button
                 variant="contained"
-                onClick={() => dispatch(addToCart(product))}
+                onClick={() => {
+                  dispatch(addToCart(product));
+                  notify();
+                }}
               >
                 Add To Cart
               </Button>

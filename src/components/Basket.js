@@ -8,16 +8,8 @@ import {
 } from "../features/cartSlice";
 
 const Basket = () => {
-  const { cart } = useSelector((item) => item.user);
+  const { cart } = useSelector((item) => item.cart);
   const dispatch = useDispatch();
-
-  const getTotalQuantity = () => {
-    let total = 0;
-    cart.forEach((item) => {
-      total += item.quantity;
-    });
-    return total;
-  };
 
   const getTotal = () => {
     let totalQuantity = 0;
@@ -42,8 +34,6 @@ const Basket = () => {
         }}
       >
         Total Amount: {getTotal().totalPrice.toFixed(2)} USD 💰
-        {/* {getTotalQuantity() || 0}
-        total ({getTotal().totalQuantity} items) :{" "} */}
       </Typography>
       <Typography
         variant="subtitle1"
@@ -56,14 +46,13 @@ const Basket = () => {
         }}
       >
         Total Products Count:
-        {/* {getTotalQuantity() || 0} */}
-        {getTotal().totalQuantity}
+        {getTotal().totalQuantity || 0}
       </Typography>
 
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent: "center",
           flexWrap: "wrap",
         }}
       >
@@ -77,6 +66,7 @@ const Basket = () => {
                 boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
                 padding: "10px ",
                 marginTop: "30px",
+                marginLeft: { xs: "0px", md: "20px" },
               }}
             >
               <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -151,7 +141,7 @@ const Basket = () => {
                     padding: "0px 10px",
                   }}
                 >
-                  0
+                  {item.quantity}
                 </Typography>
                 <Button
                   variant="outlined"

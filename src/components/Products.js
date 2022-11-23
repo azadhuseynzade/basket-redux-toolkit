@@ -3,10 +3,12 @@ import { Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addToCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const Products = () => {
   const [products, setProducts] = useState([]);
+
   const dispatch = useDispatch();
   const notify = () => toast("Added Successfully");
 
@@ -86,15 +88,16 @@ const Products = () => {
                   }}
                 >
                   {product?.price} USD{" "}
-                  <Link
-                    to="/"
-                    style={{ textDecoration: "none" }}
-                    onClick={notify}
-                  >
-                    <Button onClick={() => dispatch(addToCart(product))}>
+                  <Link to="/" style={{ textDecoration: "none" }}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        dispatch(addToCart(product));
+                        notify();
+                      }}
+                    >
                       Add To Cart
                     </Button>
-                    <ToastContainer position="bottom-left" />
                   </Link>
                 </Typography>
               </Box>

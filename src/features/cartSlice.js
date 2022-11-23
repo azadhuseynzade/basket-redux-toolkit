@@ -6,7 +6,7 @@ const items =
     : [];
 
 const cartSlice = createSlice({
-  name: "user",
+  name: "cart",
   initialState: {
     cart: items,
   },
@@ -25,6 +25,7 @@ const cartSlice = createSlice({
         JSON.stringify(state.cart.map((item) => item))
       );
     },
+
     removeFromCart(state, action) {
       const deleted = state.cart.filter(
         (cartItem) => cartItem.id !== action.payload.id
@@ -32,10 +33,12 @@ const cartSlice = createSlice({
 
       state.cart = deleted;
     },
+
     incrementQuantity: (state, action) => {
       const item = state.cart.find((item) => item.id === action.payload);
       item.quantity++;
     },
+
     decrementQuantity: (state, action) => {
       const item = state.cart.find((item) => item.id === action.payload);
       if (item.quantity === 1) {
@@ -46,10 +49,12 @@ const cartSlice = createSlice({
     },
   },
 });
+
 export const {
   addToCart,
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;
