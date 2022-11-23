@@ -34,7 +34,7 @@ const Basket = () => {
           paddingTop: "1.2rem",
         }}
       >
-        Total Amount: {getTotal().totalPrice.toFixed(2)} USD 💰
+        Total Amount: {formatter.format(getTotal().totalPrice.toFixed(2))}💰
       </Typography>
       <Typography
         variant="subtitle1"
