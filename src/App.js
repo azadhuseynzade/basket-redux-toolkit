@@ -7,19 +7,24 @@ import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 import { ToastContainer } from "react-toastify";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+let persistor = persistStore(store);
 
 function App() {
   return (
-    <Provider store={store}>
-      <Navbar />
-      <ToastContainer position="bottom-left" />
+    <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>
+        <Navbar />
+        <ToastContainer position="bottom-left" />
 
-      <Routes>
-        <Route exact path="/" element={<Products />} />
-        <Route exact path="/:id" element={<ProductsDetail />} />
-        <Route exact path="/basket" element={<Basket />} />
-      </Routes>
-    </Provider>
+        <Routes>
+          <Route exact path="/" element={<Products />} />
+          <Route exact path="/:id" element={<ProductsDetail />} />
+          <Route exact path="/basket" element={<Basket />} />
+        </Routes>
+      </Provider>
+    </PersistGate>
   );
 }
 

@@ -5,7 +5,6 @@ import { addToCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const Products = () => {
   const [products, setProducts] = useState([]);
 
@@ -23,33 +22,34 @@ const Products = () => {
       sx={{
         display: "flex",
         justifyContent: "space-around",
-        paddingTop: "30px",
+        paddingTop: "2rem",
         flexWrap: "wrap",
       }}
     >
       {products.map((product) => {
         return (
-          <Link
+          <Box
             key={product.id}
-            to={`/${product.id}`}
-            style={{ textDecoration: "none" }}
-          >
-            <Box
-              sx={{
-                cursor: "pointer",
+            sx={{
+              cursor: "pointer",
 
-                borderRadius: "5px",
-                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
-                marginTop: "30px",
-                width: "350px",
-                height: "350px",
-              }}
+              borderRadius: "0.3rem",
+              boxShadow: "rgba(100, 100, 111, 0.2) 0rem 0.2rem 2rem 0rem;",
+              marginTop: "2rem",
+              width: "22rem",
+              height: "22rem",
+            }}
+          >
+            <Link
+              key={product.id}
+              to={`/${product.id}`}
+              style={{ textDecoration: "none" }}
             >
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  paddingTop: "15px",
+                  paddingTop: "1rem",
                 }}
               >
                 <img
@@ -60,49 +60,58 @@ const Products = () => {
                   style={{ objectFit: "scale-down" }}
                 />
               </Box>
-              <Typography
-                variant="h6"
+            </Link>
+
+            <Typography
+              variant="h6"
+              sx={{
+                textAlign: "center",
+                fontSize: "0.9rem",
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              {product?.title.slice(0, 10)}
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                paddingTop: "0.3rem",
+              }}
+            >
+              <Box
+                variant="subtitle1"
                 sx={{
                   textAlign: "center",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "black",
+                  fontSize: "1rem",
+                  fontWeight: "400",
+                  color: "red",
                 }}
               >
-                {product?.title}
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  paddingTop: "15px",
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    textAlign: "center",
-                    fontSize: "16px",
-                    fontWeight: "400",
-                    color: "red",
-                  }}
-                >
-                  {product?.price} USD{" "}
-                  <Link to="/" style={{ textDecoration: "none" }}>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        dispatch(addToCart(product));
-                        notify();
-                      }}
-                    >
-                      Add To Cart
-                    </Button>
-                  </Link>
-                </Typography>
+                {product?.price} USD{" "}
               </Box>
             </Box>
-          </Link>
+            <Box
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                paddingTop: "0.3rem",
+              }}
+            >
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    dispatch(addToCart(product));
+                    notify();
+                  }}
+                >
+                  Add To Cart
+                </Button>
+              </Link>
+            </Box>
+          </Box>
         );
       })}
     </Box>

@@ -27,10 +27,10 @@ const Basket = () => {
         variant="h6"
         sx={{
           textAlign: "center",
-          fontSize: "30px",
+          fontSize: "2rem",
           fontWeight: "bold",
           color: "red",
-          paddingTop: "20px",
+          paddingTop: "1.2rem",
         }}
       >
         Total Amount: {getTotal().totalPrice.toFixed(2)} USD 💰
@@ -39,10 +39,10 @@ const Basket = () => {
         variant="subtitle1"
         sx={{
           textAlign: "center",
-          fontSize: "30px",
+          fontSize: "2rem",
           fontWeight: "bold",
           color: "black",
-          paddingTop: "20px",
+          paddingTop: "1.2rem",
         }}
       >
         Total Products Count:
@@ -61,12 +61,12 @@ const Basket = () => {
             <Box
               key={item.id}
               sx={{
-                maxWidth: "300px",
-                borderRadius: "5px",
-                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
-                padding: "10px ",
-                marginTop: "30px",
-                marginLeft: { xs: "0px", md: "20px" },
+                maxWidth: "18.75rem",
+                borderRadius: "0.3rem",
+                boxShadow: "rgba(100, 100, 111, 0.2) 0rem 0.5rem 2rem 0rem;",
+                padding: "0.7rem ",
+                marginTop: "2rem",
+                marginLeft: { xs: "0rem", md: "1.2rem" },
               }}
             >
               <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -82,18 +82,18 @@ const Basket = () => {
                 variant="h6"
                 sx={{
                   textAlign: "center",
-                  fontSize: "16px",
+                  fontSize: "1rem",
                   color: "black",
                   fontWeight: "500",
                 }}
               >
-                {item?.title}
+                {item?.title.slice(0, 10)}
               </Typography>
               <Typography
                 variant="subtitle1"
                 sx={{
                   textAlign: "center",
-                  fontSize: "22px",
+                  fontSize: "1.2rem",
                   color: "red",
                   fontWeight: "600",
                 }}
@@ -104,7 +104,7 @@ const Basket = () => {
                 variant="subtitle1"
                 sx={{
                   textAlign: "center",
-                  fontSize: "22px",
+                  fontSize: "1.2rem",
                   color: "black",
                 }}
               >
@@ -114,38 +114,38 @@ const Basket = () => {
                 variant="subtitle1"
                 sx={{
                   textAlign: "center",
-                  fontSize: "16px",
+                  fontSize: "0.8rem",
                   color: "gray",
                 }}
               >
-                {item?.description.substring(0, 100)}...
+                {item?.description.substring(0, 80)}...
               </Typography>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-around",
-                  marginTop: "10px",
+                  marginTop: "0.7rem",
                 }}
               >
                 <Button
                   variant="outlined"
-                  sx={{ fontSize: "20px", fontWeight: "bold" }}
+                  sx={{ fontSize: "1.1rem", fontWeight: "bold" }}
                   onClick={() => dispatch(incrementQuantity(item.id))}
                 >
                   +
                 </Button>
                 <Typography
                   sx={{
-                    fontSize: "30px",
-                    marginTop: "5px",
-                    padding: "0px 10px",
+                    fontSize: "2rem",
+                    marginTop: "0.3rem",
+                    padding: "0rem 0.7rem",
                   }}
                 >
                   {item.quantity}
                 </Typography>
                 <Button
                   variant="outlined"
-                  sx={{ fontSize: "20px", fontWeight: "bold" }}
+                  sx={{ fontSize: "1.2rem", fontWeight: "bold" }}
                   onClick={() => dispatch(decrementQuantity(item.id))}
                 >
                   -

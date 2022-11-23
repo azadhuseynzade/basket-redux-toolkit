@@ -23,7 +23,6 @@ const ProductsDetail = () => {
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [id]);
-  console.log(product, "producttttttt");
 
   const incrementCount = () => {
     setCount((prevState) => prevState + 1);
@@ -63,13 +62,16 @@ const ProductsDetail = () => {
             }
           </Box>
           <Box
-            sx={{ paddingTop: "20px", paddingLeft: { xs: "0px", md: "40px" } }}
+            sx={{
+              paddingTop: "1.2rem",
+              paddingLeft: { xs: "0rem", md: "2.5rem" },
+            }}
           >
             <Typography
               variant="h6"
               sx={{
                 textAlign: { xs: "center", md: "left" },
-                fontSize: "18px",
+                fontSize: "1.1rem",
                 fontWeight: "600",
                 color: "black",
               }}
@@ -80,7 +82,7 @@ const ProductsDetail = () => {
               variant="subtitle1"
               sx={{
                 textAlign: { xs: "center", md: "left" },
-                fontSize: "20px",
+                fontSize: "1.2rem",
                 color: "red",
                 fontWeight: "600",
               }}
@@ -91,9 +93,9 @@ const ProductsDetail = () => {
               variant="h6"
               sx={{
                 textAlign: { xs: "center", md: "left" },
-                fontSize: "14px",
+                fontSize: "0.9rem",
                 color: "gray",
-                maxWidth: "500px",
+                maxWidth: "31.25rem",
               }}
             >
               {product?.description}
@@ -103,11 +105,11 @@ const ProductsDetail = () => {
               sx={{
                 display: "flex",
                 justifyContent: { xs: "center", md: "left" },
-                marginTop: "10px",
+                marginTop: "0.8rem",
               }}
             >
               <Button
-                sx={{ fontSize: "20px", fontWeight: "bold" }}
+                sx={{ fontSize: "1.2rem", fontWeight: "bold" }}
                 onClick={() => {
                   dispatch(incrementQuantity(product.id));
                   incrementCount();
@@ -115,11 +117,11 @@ const ProductsDetail = () => {
               >
                 +
               </Button>
-              <Typography sx={{ fontSize: "20px", marginTop: "7px" }}>
+              <Typography sx={{ fontSize: "1.2rem", marginTop: "0.5rem" }}>
                 {count}
               </Typography>
               <Button
-                sx={{ fontSize: "20px", fontWeight: "bold" }}
+                sx={{ fontSize: "1.2rem", fontWeight: "bold" }}
                 onClick={() => {
                   dispatch(decrementQuantity(product.id));
                   decrementCount();
@@ -131,7 +133,7 @@ const ProductsDetail = () => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: { xs: "center", md: "left", marginTop: "15px" },
+                justifyContent: { xs: "center", md: "left", marginTop: "1rem" },
               }}
             >
               <Button
